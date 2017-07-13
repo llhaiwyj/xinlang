@@ -1,0 +1,141 @@
+*{
+		margin:0rem;
+		padding:0rem;
+	}
+	img{
+		display:block;
+	}
+	.header{
+		width:100%;
+		height:1rem;
+		background:#008af5;
+		border-bottom:0.01rem solid #c5c3c3;
+	}
+	.loge{
+		width:1.7rem;
+		height:1rem;
+		float:left;
+		border-right:0.02rem solid #c5c3c3;
+	}
+	.loge img{
+		width:1.1rem;
+		height:0.5rem;
+		float:left;
+		margin-left: 0.2rem;
+		margin-top:0.3rem;
+	}
+	.zi{
+		width:1.9rem;
+		height:1rem;
+		float:left;
+		text-align:center;
+		line-height: 1rem;
+		font-size:0.35rem;
+		color:#fff;
+	}
+	.from{
+		width:1rem;
+		height:1rem;
+		float:left;
+		text-align:center;
+		line-height: 1rem;
+		color:#fff;
+		font-size:0.35rem;
+	}
+	.ren{
+		width:0.5rem;
+		height:0.5rem;
+		float:left;
+		margin-left:3rem;
+		margin-top:0.3rem;
+	}
+	.cai{
+		width:0.5rem;
+		height:0.5rem;
+		float:left;
+		margin-left:0.5rem;
+		margin-top:0.3rem;
+	}
+	.guanggao{
+		width:9.78rem;
+		height:4rem;
+	}
+	.biaoy{
+		width:9.3rem;
+		height:auto;
+		font-size:0.6rem;
+		margin-left:0.4rem;
+		margin-top:0.8rem;
+	}
+	.cz{
+		width:9.3rem;
+		height:1rem;
+		margin-left:0.4rem;
+		margin-top:0.6rem;
+	}
+	.bz{
+		width:0.9rem;
+		height:0.9rem;
+		float:left;
+		border-radius:0.45rem;
+		overflow: hidden;
+	}
+	.laiyuan{
+		width:3rem;
+		height:0.5rem;
+		float:left;
+		line-height: 0.5rem;
+		font-size:0.3rem;
+		margin-left:0.4rem;
+	}
+	.tim{
+		width:3rem;
+		height:0.5rem;
+		float:left;
+		line-height: 0.5rem;
+		font-size:0.3rem;
+		margin-left:0.4rem;
+	}
+	.guanzhu{
+		width:1.5rem;
+		height:0.6rem;
+		background:#fe9600;
+		float:left;
+		color:#fff;
+		margin-left:3rem;
+		text-align:center;
+		line-height: 0.6rem;
+		font-size:0.3rem;
+		margin-top:0.2rem;
+	}
+	.artical{
+		width:9.1rem;
+		height:auto;
+		margin-left:0.4rem;
+		font-size:0.31rem;
+		margin-top:0.2rem;
+		text-indent:1rem;
+	}
+	.peitu{
+		width:9.1rem;
+		height:4rem;
+		margin-left:0.4rem;
+		margin-top:0.3rem;
+	}
+	.laizi{
+		width:9.1rem;
+		height:0.5rem;
+		font-size:0.4rem;
+		margin-left:0.4rem;
+		margin-top:0.3rem;
+	}
+.wu{
+	margin-bottom:0.2rem;
+}
+
+
+
+
+
+
+

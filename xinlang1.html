@@ -1,0 +1,371 @@
+<!Doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+
+
+<script src="js/zepto.js" type="text/javascript"></script>
+<script src="js/dropload.min.js"></script>
+<script src="js/rem.js"></script>
+<script src="js/xinlang.js"></script>
+<link rel="stylesheet" type="text/css" href="css/xinlang.css">
+<body>
+	<!--<div class="header">-->
+		<!--<p class="back"><</p>
+		<p class="find">发现</p>
+		<p class="zhuti"><b>泡泡新闻</b></p>
+		<p class="sou"><img src="img/sou.png" /></p>-->
+		<!--<div class="loge"><img src="img/xinlang.png"/></div>
+		<p class="zi">新闻</p>
+		<p class="jiantou"><img src="img/jian.png"/></p>
+		<p class="laili" id="navloader"></p>
+		<p class="cai"><img src="img/cai.png"/></p>-->
+	<!--</div>-->
+	<ul class='nav'>
+		
+	</ul>
+	<!--<ul class="nav-two">
+		<li>视频</li>
+		<li>图片</li>
+		<li>观点</li>
+		<li>锐见</li>
+		<li>滚动</li>
+	</ul>-->
+	<!--<div class="xiala">
+		<p>
+			有新内容，下拉刷新
+		</p>
+	</div>-->
+	<div class='content'>
+		
+	</div>
+	<div class="go-top">↑</div>
+	<!--<div class="list" now="1" num="2">
+		  <a href="javascript:;">加载更多</a>  
+	</div>-->
+	<!--<div class="wt">
+		<p class="tit">习近平就缅甸军机失事向缅甸总统吴延觉致慰问电</p>
+		<p class="laiyuan">国家宗教事务局网站</p>
+		<p class="shuliang">100</p>
+		<img src="img/lun.png" class="pinglun"/>
+	</div>
+	<div class="yzt">
+		<img src="" class="tu"/>
+		<p class="tity">习近平就缅甸军机失事向缅甸总统吴延觉致慰问电</p>
+		<p class="laiyuany">国家宗教事务局网站</p>
+		<p class="shuliangy">100</p>
+		<img src="img/lun.png" class="pingluny"/>
+	</div>
+	<div class="szt">
+		<p class="tite">日本搞“最强壮男子”大赛 工人秀肌肉</p>
+		<img src="" class="tu1"/>
+		<img src="" class="tu2"/>
+		<img src="" class="tu2"/>
+		<p class="tuji">图集</p>
+		<img src="img/lun.png" class="pingluner"/>
+		<p class="shulianger">100</p>
+		
+	</div>
+	<div class="dzt">
+		<p class="tite">日本搞“最强壮男子”大赛 工人秀肌肉</p>
+		<img src="" class="datu"/>
+		<p class="guanggao">广告</p>
+		<img src="img/lun.png" class="pingluner"/>
+		<p class="shulianger">100</p>
+	</div>-->
+</body>
+<!--<script src="js/jquery-1.8.3.min.js"></script>-->
+<script>
+	  var jk=''; 
+	 var page=0;
+	 var num=0;
+//	    var sj=Date.parse(new Date())
+var time='';
+var arr=[];
+$(function(){
+	
+var stl='';
+	 var lianjie='';
+	
+    
+ $.ajax({
+		type:'get',
+		url:'http://www.ictir2018.org:11000/v1/get_source',
+		async:false,
+		success: function(e){
+		var e = eval('('+e+')');
+		     re=JSON.stringify(e);
+             sessionStorage.setItem('e',re);
+			for(var i=0;i<e.detail.length;i++){
+				lianjie+=e.detail[i][0];
+				stl+="<li>"+e.detail[i][1]+"<span style='display:none'>?source="+e.detail[i][0]+"</span></li>"
+			}
+//				stl+="<li>"+e.detail[0].recommend+"</li><li>"+e.detail.hot+"</li><li>"+e.detail.society+"</li><li>"+e.detail.tech+"</li><li class='xiala'>更多</li>"
+		
+			 $('.nav').append(stl);
+			 
+			 for(var i=0;i<$(".nav li").length;i++){
+			 	$(".nav li").eq(0).css("color","#1da1f2")
+			 	$(".nav li").eq(0).css("border-bottom","0.02rem solid #0575b9")
+ 	            $(".nav li").eq(i).click(function(){
+// 	            	alert($(".nav li").index(this))
+ 	            	if($(".nav li").index(this)!==0){
+ 	            		$(".nav li").eq(0).css("color","#000")
+ 	            		$(".nav li").eq(0).css("border-bottom","none")
+ 	            	}else {
+ 	            		$(".nav li").eq(0).css("color","#1da1f2")
+			 	        $(".nav li").eq(0).css("border-bottom","0.02rem solid #0575b9")
+ 	            	}
+ 	            })
+ }
+//			 alert($('.nav li').eq(0).html())
+//			 alert($('.nav li').eq(1).html())
+//			 alert($('.nav li').eq(2).html())
+//			 alert($('.nav li').eq(3).html())
+//			 alert($('.nav li').length)
+			
+//			alert(lianjie) 
+//			 for(var j=0;j<$('.nav li').length;j++){
+////			 	 alert($('.nav li').eq(j).html())
+//			 }
+			 
+			 
+		}
+	})
+  
+					
+	clickNavTab(page);//切换得到相应的数据。
+				
+	getNavOwnData(page,'?source=recommend','recommend');//获取初始化疏忽。			
+			
+    
+});
+
+
+
+
+
+function getNavOwnData(page,resoce,recos){
+	$('.content').html('');
+            // 拼接HTML
+            var result = '';
+            $.ajax({
+                type: 'GET',
+                url: 'http://ictir2018.org:11000/v1/refresh_news'+resoce,
+                dataType: 'json',
+                success: function(data){
+//          	debugger;
+//         	var data = eval('('+data+')'); 
+                
+			        var records=data.detail
+			     //debugger
+			    
+            for( var i= 0; i<records.length; i++){
+                  time=records[10].create_time 
+              
+                
+            	if(records[i].image_url==''){
+            		
+            		result+="<a href='"+records[i].source_url+"?id="+records[i].id+"'><div class='wt'><p class='tit'>"+records[i].title+"</p><p class='laiyuan'>"+records[i].source+"</p><p class='shuliang'>100</p><img src='img/lun.png' class='pinglun'/></div></a>"
+            	}else if(records[i].source==undefined){
+            		result+="<a href='"+records[i].source_url+"?id="+records[i].id+"'><div class='yzt'><img src="+records[i].image_url+" class='tu'/><p class='tity'>"+records[i].title+"</p><p class='laiyuany'>"+records[i].company+"</p><p class='shuliangy'>100</p><img src='img/lun.png' class='pingluny'/></div></a>"
+            	}else{
+            		result+="<a href='"+records[i].source_url+"?id="+records[i].id+"'><div class='yzt'><img src="+records[i].image_url+" class='tu'/><p class='tity'>"+records[i].title+"</p><p class='laiyuany'>"+records[i].source+"</p><p class='shuliangy'>100</p><img src='img/lun.png' class='pingluny'/></div></a>"
+            	}
+            	}
+             //alert(time)
+             arr.push(time)
+             arr.length=0
+                $('.content').append(result);    
+                   }
+               })
+            
+//下拉加载     
+
+ var time='1499071925'
+   
+    $('.content').dropload({
+        scrollArea : window,
+        domDown : {
+   		domClass : 'dropload-down',   
+   		domLoad : '<div class="dropload-load"><img src="img/load.gif"/></div>' ,
+   		domNoData : '<div class="dropload-noData">暂无更多数据</div>'
+   	},
+        loadDownFn : function(me){
+            // 拼接HTML
+//      var time=Math.round(new Date().getTime()/1000);
+             page++
+            var results = '';
+            $.ajax({
+                type: 'GET',
+                url: 'http://ictir2018.org:11000/v1/get_old_news?create_time='+time+'&source='+recos,
+                dataType: 'json',
+                success: function(data){
+         	//debugger;
+         	//1498807837
+//            	var data = eval('('+data+')'); 
+			        var recordss=data.detail
+			         re=JSON.stringify(data);
+                     sessionStorage.setItem('data',re);
+                   //debugger;
+                    var arrLen = recordss.length;
+                    //debugger;
+                    if(arrLen > 0){
+                       for( var i= 0; i<recordss.length; i++){
+                        time=recordss[10].create_time
+                
+                   
+                   
+                   
+                        
+            	if(recordss[i].image_url==''){
+            		
+            		results+="<a href='"+recordss[i].source_url+"?id="+recordss[i].id+"'><div class='wt'><p class='tit'>"+recordss[i].title+"</p><p class='laiyuan'>"+recordss[i].source+"</p><p class='shuliang'>100</p><img src='img/lun.png' class='pinglun'/></div></a>"
+            	}else if(recordss[i].source==undefined){
+            		result+="<a href='"+recordss[i].source_url+"?id="+recordss[i].id+"'><div class='yzt'><img src="+recordss[i].image_url+" class='tu'/><p class='tity'>"+recordss[i].title+"</p><p class='laiyuany'>"+recordss[i].company+"</p><p class='shuliangy'>100</p><img src='img/lun.png' class='pingluny'/></div></a>"
+            	}else{
+            		results+="<a href='"+recordss[i].source_url+"?id="+recordss[i].id+"'><div class='yzt'><img src="+recordss[i].image_url+" class='tu'/><p class='tity'>"+recordss[i].title+"</p><p class='laiyuany'>"+recordss[i].source+"</p><p class='shuliangy'>100</p><img src='img/lun.png' class='pingluny'/></div></a>"
+            	}
+            	}
+                     
+                      arr.push(time)
+                    // 如果没有数据
+                    }else{
+                        // 锁定
+                        me.lock();
+                        // 无数据
+                        me.noData();
+                    }
+//                     if(records.length=records.length){
+//                        // 再往下已经没有数据
+//            // 锁定
+//                        me.lock();
+//            // 显示无数据
+//                        me.noData();
+//                         break;
+//                  }
+                    // 为了测试，延迟1秒加载
+                    setTimeout(function(){
+                        // 插入数据到页面，放到最后面
+                        $('.content').append(results);
+                        // 每次数据插入，必须重置
+                        me.resetload();
+                    },1000);
+                },
+//              error: function(xhr, type){
+//                  alert('Ajax error!');
+//                  // 即使加载出错，也得重置
+//                  me.resetload();
+//              }
+            });
+        }
+    });   
+            
+            
+            
+            
+            
+            
+            
+}
+	
+             
+            
+//var a=recommend 
+
+
+function clickNavTab(page){
+//	var b='';
+//	var a='?source=recommend';
+//	b=a.split('=')[1];
+//	alert(b)
+//	if($('#navloader').text()==''){
+//		getNavOwnData(page,$('#navloader').html(a),a.split('=')[1])
+//		alert($('#navloader').html())
+//	}else{
+		$('.nav li').click(function(){
+		getNavOwnData(page,$(this).children('span').text(),$(this).text().split('=')[1])
+		$('#navloader').text($(this).text().split('?')[0])
+//		alert($(this).children('span').text())//
+//		alert($(this).text().split('?')[0])//hanzi
+//		alert($(this).text().split('=')[1])//yingwen 
+	})
+//	}
+	
+	
+	
+}
+
+
+
+
+   
+
+	
+	
+
+
+
+
+
+
+
+
+//返回顶部
+        window.onscroll=function(){
+    if($(window).scrollTop()>1000){
+         $('.go-top').show();
+    }else{
+         $('.go-top').hide();
+    }
+} 
+$('.go-top').click(function(){
+    scroll('0px', 300);
+
+});
+function scroll(scrollTo, time) {
+    var scrollFrom = parseInt(document.body.scrollTop),
+        i = 0,
+        runEvery = 5; // run every 5ms
+
+    scrollTo = parseInt(scrollTo);
+    time /= runEvery;
+
+    var interval = setInterval(function () {
+        i++;
+
+        document.body.scrollTop = (scrollTo - scrollFrom) / time * i + scrollFrom;
+
+        if (i >= time) {
+            clearInterval(interval);
+        }
+    }, runEvery);
+} 
+
+//$('.content').dropload({
+//  scrollArea : window,
+//  loadDownFn : function(me){
+//      $.ajax({
+//          type: 'GET',
+//          url: 'json/more.json',
+//          dataType: 'json',
+//          success: function(data){
+//              alert(data);
+//              // 代码执行后必须重置
+//              me.resetload();
+//          },
+//          error: function(xhr, type){
+//              alert('Ajax error!');
+//              me.resetload();
+//          }
+//      });
+//  }
+//});
+
+
+ 
+</script>
+
+</html>
